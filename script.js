@@ -43,8 +43,8 @@ const CONFIG = {
 
   // ── URLS ──────────────────────────────────────────────────
   // Palitan ng actual URLs pagkatapos mong i-host ang pages
-  resultsUrl:      'https://YOUR_RESULTS_PAGE_URL',      // <- palitan (results.html)
-  disqualifiedUrl: 'https://YOUR_DISQUALIFIED_PAGE_URL', // <- palitan (disqualify page)
+  resultsUrl:      'https://cshellsstudio.github.io/hormones-quiz/results.html',      // <- palitan (results.html)
+  disqualifiedUrl: 'https://cshellsstudio.github.io/hormones-quiz/disqualified.html', // <- palitan (disqualify page)
 
   // ── GHL ROUND ROBIN CALENDAR ──────────────────────────────
   // Isang calendar lang — GHL ang bahala sa routing per clinician
