@@ -268,14 +268,14 @@ function goNext() {
   }
 
   if (current >= TOTAL) {
-    const result = computeResult();
-    const params = new URLSearchParams({
-      tags:     result.tags.join(','),
-      stage:    result.stage,
-      severity: result.severityLabel,
-      score:    result.totalScore,
-    });
-    window.top.location.href = CONFIG.resultsUrl + '?' + params.toString();
+   // I-save ang data sa loob ng browser para hindi na kailangan sa URL
+localStorage.setItem('quiz_tags', tags.join(','));
+localStorage.setItem('quiz_stage', stage || '');
+localStorage.setItem('quiz_severity', severity);
+localStorage.setItem('quiz_score', score);
+
+// Lilipat sa results page nang MALINIS ang URL
+window.top.location.href = CONFIG.resultsUrl;
     return;
   }
 
