@@ -302,11 +302,14 @@ function initResults() {
   const resultsEl = document.getElementById('results');
   if (!resultsEl) return;
 
-  const p        = new URLSearchParams(window.location.search);
-  const tags     = p.get('tags')     || '';
-  const stage    = p.get('stage')    || '';
-  const severity = p.get('severity') || 'mild';
-  const score    = parseInt(p.get('score') || '0');
+ // Babasahin ang tinagong data mula sa browser
+const tags     = localStorage.getItem('quiz_tags') ? localStorage.getItem('quiz_tags').split(',') : [];
+const stage    = localStorage.getItem('quiz_stage') || '';
+const severity = localStorage.getItem('quiz_severity') || 'mild';
+const score    = parseInt(localStorage.getItem('quiz_score')) || 0;
+
+// Opsyonal: Burahin ang data pagkatapos basahin para malinis ang browser sa susunod
+// localStorage.clear();
   const plan     = PLANS[severity] || PLANS.mild;
 
   // Build CTA URL with quiz data as URL params for GHL calendar pre-fill
