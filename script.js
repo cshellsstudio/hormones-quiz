@@ -268,14 +268,51 @@ function goNext() {
   }
 
   if (current >= TOTAL) {
-   // I-save ang data sa loob ng browser para hindi na kailangan sa URL
-localStorage.setItem('quiz_tags', tags.join(','));
-localStorage.setItem('quiz_stage', stage || '');
-localStorage.setItem('quiz_severity', severity);
-localStorage.setItem('quiz_score', score);
+ if (current >= TOTAL) {
+    // 1. I-compute muna natin ang final score mula sa mga sinagutan ng user
+    let score = 0;
+    for (let key in answers) {
+      if (answers[key] && typeof answers[key].score === 'number') {
+        score += answers[key].score;
+      }
+    }
 
-// Lilipat sa results page nang MALINIS ang URL
-window.top.location.href = CONFIG.resultsUrl;
+    // 2. Alamin natin ang severity batay sa score
+    let severity = 'mild';
+    if (score >= 9 && score <= 16) {
+      severity = 'moderate';
+    } else if (score >= 17) {
+      severity = 'significant';
+    }
+
+    // 3. Pagsama-samahin natin ang lahat ng tags mula sa mga sagot
+    let stage = '';
+    let tags = [];
+
+    // Kunin ang stage mula sa Q3
+    if (answers.q3 && answers.q3.stage) {
+      stage = answers.q3.stage;
+    }
+
+    // Kunin ang lahat ng tags na naipon
+    for (let key in answers) {
+      if (answers[key] && answers[key].tag) {
+        tags.push(answers[key].tag);
+      }
+    }
+    
+    // Idagdag ang calculated severity at stage sa tags list para sa GHL syncing mo mamaya
+    tags.push(severity === 'mild' ? CONFIG.tags.severityMild : severity === 'moderate' ? CONFIG.tags.severityModerate : CONFIG.tags.severitySevere);
+    if (stage) tags.push(stage === 'perimenopausal' ? CONFIG.tags.perimenopausal : CONFIG.tags.menopausal);
+
+    // 4. ETO NA YUNG PANG-SAVE: I-save na natin sila nang ligtas sa localStorage
+    localStorage.setItem('quiz_tags', tags.join(','));
+    localStorage.setItem('quiz_stage', stage);
+    localStorage.setItem('quiz_severity', severity);
+    localStorage.setItem('quiz_score', score);
+
+    // 5. Lilipat sa results page nang MALINIS ang URL
+    window.top.location.href = CONFIG.resultsUrl;
     return;
   }
 
