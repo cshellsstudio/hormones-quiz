@@ -43,8 +43,8 @@ const CONFIG = {
 
   // ── URLS ──────────────────────────────────────────────────
   // Palitan ng actual URLs pagkatapos mong i-host ang pages
-  resultsUrl:      results.html,      // <- palitan (results.html)
-  disqualifiedUrl: disqualified.html, // <- palitan (disqualify page)
+  resultsUrl:      'results.html',      // <- palitan (results.html)
+  disqualifiedUrl: 'disqualified.html', // <- palitan (disqualify page)
 
   // ── GHL ROUND ROBIN CALENDAR ──────────────────────────────
   // Isang calendar lang — GHL ang bahala sa routing per clinician
