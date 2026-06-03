@@ -82,4 +82,26 @@ const PLANS = {
     headline: 'Your symptoms are <em>ready for relief.</em>',
     subheadline: 'Your results indicate moderate hormonal changes affecting your daily comfort. A targeted hormone optimization plan can make a meaningful difference.',
     info: 'Moderate symptoms respond well to bioidentical hormone therapy. The Comprehensive plan gives you monthly care-plan optimization and unlimited clinician access to get your hormones back in balance.',
-    includes:
+    includes: [
+      'Everything in Essentials',
+      'Monthly care-plan optimization',
+      'Unlimited clinician messaging',
+      'Priority response times',
+      'Sleep & mood support',
+      'Sexual wellness support',
+      'Lifestyle & supplement guidance',
+    ]
+  },
+  severe: {
+    name: 'Concierge — Longevity & Hormone Transformation',
+    price: '$399 / month',
+    headline: 'Your body is asking for <em>serious support.</em>',
+    subheadline: 'Your results indicate significant hormonal disruption affecting your daily life. You deserve comprehensive, premium care — not a one-size-fits-all solution.',
+    info: 'Severe symptoms require a full-spectrum approach. The Concierge plan combines advanced hormone panels, weekly check-ins, and personalized longevity planning for women who need — and deserve — the best.',
+    includes: [
+      'Everything in Comprehensive',
+      'Weekly care check-ins',
+      'Priority clinician access',
+      'Advanced hormone panels',
+      'Metabolic wellness support',
+      'Bone health support',
