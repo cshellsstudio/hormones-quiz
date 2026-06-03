@@ -43,8 +43,8 @@ const CONFIG = {
 
   // ── URLS ──────────────────────────────────────────────────
   // Palitan ng actual URLs pagkatapos mong i-host ang pages
-  resultsUrl:      'results.html',      // <- palitan (results.html)
-  disqualifiedUrl: 'disqualified.html', // <- palitan (disqualify page)
+  resultsUrl:      'https://YOUR_RESULTS_PAGE_URL',      // <- palitan (results.html)
+  disqualifiedUrl: 'https://YOUR_DISQUALIFIED_PAGE_URL', // <- palitan (disqualify page)
 
   // ── GHL ROUND ROBIN CALENDAR ──────────────────────────────
   // Isang calendar lang — GHL ang bahala sa routing per clinician
@@ -263,19 +263,19 @@ function computeResult() {
 function goNext() {
   // Q2 disqualify check
   if (current === 2 && answers.q2 && answers.q2.tag === CONFIG.tags.disqualified) {
-    window.top.location.href = CONFIG.disqualifiedUrl + '?tag=' + CONFIG.tags.disqualified;
+    sessionStorage.setItem('quiz_tags', CONFIG.tags.disqualified);
+    window.top.location.href = CONFIG.disqualifiedUrl;
     return;
   }
 
   if (current >= TOTAL) {
     const result = computeResult();
-    const params = new URLSearchParams({
-      tags:     result.tags.join(','),
-      stage:    result.stage,
-      severity: result.severityLabel,
-      score:    result.totalScore,
-    });
-    window.top.location.href = CONFIG.resultsUrl + '?' + params.toString();
+    // Save to sessionStorage — keeps URL clean
+    sessionStorage.setItem('quiz_tags',     result.tags.join(','));
+    sessionStorage.setItem('quiz_stage',    result.stage);
+    sessionStorage.setItem('quiz_severity', result.severityLabel);
+    sessionStorage.setItem('quiz_score',    result.totalScore);
+    window.top.location.href = CONFIG.resultsUrl;
     return;
   }
 
@@ -302,15 +302,16 @@ function initResults() {
   const resultsEl = document.getElementById('results');
   if (!resultsEl) return;
 
-  const p        = new URLSearchParams(window.location.search);
-  const tags     = p.get('tags')     || '';
-  const stage    = p.get('stage')    || '';
-  const severity = p.get('severity') || 'mild';
-  const score    = parseInt(p.get('score') || '0');
+  // Read from sessionStorage — URL stays clean
+  const tags     = sessionStorage.getItem('quiz_tags')     || '';
+  const stage    = sessionStorage.getItem('quiz_stage')    || '';
+  const severity = sessionStorage.getItem('quiz_severity') || 'mild';
+  const score    = parseInt(sessionStorage.getItem('quiz_score') || '0');
   const plan     = PLANS[severity] || PLANS.mild;
 
   // Build CTA URL with quiz data as URL params for GHL calendar pre-fill
   // GHL calendar custom fields needed: quiz_severity, quiz_stage, quiz_score, quiz_tags
+  // GHL calendar still needs URL params for custom field pre-fill
   const calendarParams = new URLSearchParams({
     quiz_severity: severity,
     quiz_stage:    stage,
