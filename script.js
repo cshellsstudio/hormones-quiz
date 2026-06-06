@@ -38,7 +38,7 @@ const CONFIG = {
   disqualifiedUrl: 'https://quiz.rcreshil.online/disqualified.html',
 
   // ── GHL ROUND ROBIN CALENDAR ──────────────────────────────
-  calendarUrl: 'calendarUrl: 'https://app.funnelgenie.io/widget/bookings/telehealth-consultation',
+  calendarUrl: 'https://link.leadconnectorhq.com/widget/bookings/telehealth-consultation',
 
   // ── GHL WEBHOOK (receives email + tags before booking) ────
   webhookUrl: 'https://services.leadconnectorhq.com/hooks/uhLI3atfL6jskyRIKRqT/webhook-trigger/8533662f-17a8-4c93-b34c-48dc0aa3426d',
@@ -323,12 +323,6 @@ function initResults() {
   const plan = PLANS[severity] || PLANS.mild;
 
   // Build CTA URL
-  const calendarParams = new URLSearchParams({
-    quiz_severity: severity,
-    quiz_stage:    stage,
-    quiz_score:    score,
-    quiz_tags:     tags,
-  });
   document.getElementById('ctaBtn').href = CONFIG.calendarUrl + '?' + calendarParams.toString();
 
   // Render content
