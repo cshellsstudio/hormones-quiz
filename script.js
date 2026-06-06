@@ -38,7 +38,7 @@ const CONFIG = {
   disqualifiedUrl: 'https://quiz.rcreshil.online/disqualified.html',
 
   // ── GHL ROUND ROBIN CALENDAR ──────────────────────────────
-  calendarUrl: 'https://YOUR_GHL_CALENDAR_LINK',
+  calendarUrl: 'https://link.leadconnectorhq.com/widget/bookings/telehealth-consultation',
 
   // ── GHL WEBHOOK (receives email + tags before booking) ────
   webhookUrl: 'https://services.leadconnectorhq.com/hooks/uhLI3atfL6jskyRIKRqT/webhook-trigger/8533662f-17a8-4c93-b34c-48dc0aa3426d',
